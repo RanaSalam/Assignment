@@ -4,7 +4,7 @@ Wave,Stateofhealth,Satisfactionwithlife,Democracy,Scaleofincome,Socialclass,Coun
 5,2.61,6.25,7.59,1.9,3.94,Mexico
 5,2.45,7.59,8.51,2.8,3.02,Peru
 5,2.08,7.06,7.88,4.75,3.71,Brazil
-5,1.67,8.08,9.51,6.78,2.08,Sweden
+5,1.67,8.08,9.51,6.78,2.9,Sweden
 5,2.12,6.86,8.2,4.71,3.45,Spain
 5,2.02,7.27,9.31,4.04,2.43,Germany
 5,2.07,7.15,8.61,4.35,2.76,Poland
@@ -20,7 +20,7 @@ Wave,Stateofhealth,Satisfactionwithlife,Democracy,Scaleofincome,Socialclass,Coun
 6,2.25,8.37,8.14,4.18,3.45,Mexico
 6,2.33,7.55,8.51,5.29,3.04,Peru
 6,2.12,8.04,7.96,4.29,3.8,Brazil
-6,1.9,7.76,9.63,5.49,2.55,Sweden
+6,1.9,7.76,9.63,5.49,3,Sweden
 6,2.12,6.69,9.12,4.71,3.25,Spain
 6,2.29,6.86,9.18,4.86,3.16,Germany
 6,2.29,7.12,8.63,3.86,2.88,Poland
