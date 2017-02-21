@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+   <!-- <style>
+        /* data table styles */
+        #grid { height: 400px; width: 100%; padding:30px; overflow-y: scroll ; }
+        .row, .header { clear: left; font-size: 12px; line-height: 18px; height: 18px; }
+        .row:nth-child(odd) { background: rgba(0,0,0,0.05); }
+        .header { font-weight: bold; }
+        .cell { float: left; overflow: hidden; white-space: nowrap; width: 8%; height: 18px; }
+        .col-0 { width: 30%; }
+        .col-1 { width: 60%; }
+        .col-2 { width: 10%; }
+    </style>-->
+    <title>
+        Information Visualization Project 2 2017
+    </title>
+
+    <!-- Using Parcoords, Divgrid and Radar-chart, prebuilt plugin-style d3 libraries -->
+
+    <script src="js/d3/d3.min.js"></script>
+    <script src="js/d3.svg.multibrush.js"></script>
+    <script src="js/d3.parcoords.js"></script>
+    <script src="js/sylvester.js"></script>
+    <script src="js/divgrid.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/d3.parcoords.css">
+
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+</head>
+
+<body style="background-color:white; color:black;">
+
+<class="container" style="width:100%;margin:auto;">
+
+    <div id="title" style="font-weight: bold;text-align: center;"> Visualizing the World Through its Own Worldview</div><br>
+
+    <div class="boxboxbox" style="border: solid 2px;padding:5px;">
+        <!-- Based from the beginning on the examples from paracoord library, and then heavily modified. -->
+        <div class="row" style="width:100%;height: 350px;" >
+            <div class="col-xs-12 ">
+                <div id="example-progressive" class="parcoords" style="width:100%;height:350px"></div>
+            </div>
+        </div>
+    </div>
+<br>
+
+</div>
+
+
+    <script>
+        d3.csv('data.csv', function(data) {
+
+          data.forEach(function (d) {
+                d.Wave = +d.Wave;
+
+                d.Stateofhealth = +d.Stateofhealth;
+                d.Satisfactionwithlife = +d.Satisfactionwithlife;
+
+                d.Democracy = +d.Democracy;
+
+                d.Scaleofincome = +d.Scaleofincome;
+                d.Socialclass = +d.Socialclass;
+            });
+
+            var from_color_to_color;
+            from_color_to_color = d3.scale.linear()
+                .domain([1, 10])
+                .range(["darkblue", "lightgreen"])
+                .interpolate(d3.interpolateLab);
+
+            var from_color_to_color_brushed = d3.scale.linear()
+                .domain([1, 10])
+                .range(["blue", "red"])
+                .interpolate(d3.interpolateLab);
+
+            //Just a comment
+            //
+
+            var color = function (d) {
+                return from_color_to_color((d.Wave + d.Leisuretime + d.Stateofhealth + d.Satisfactionwithlife + d.Numberofchildren + d.Democracy + d.Educationattained + d.Scaleofincome + d.Socialclass) / 9)
+            };
+
+            var color_brushed = function (d) {
+                return from_color_to_color_brushed((d.Wave + d.Leisuretime + d.Stateofhealth + d.Satisfactionwithlife + d.Numberofchildren + d.Democracy + d.Educationattained + d.Scaleofincome + d.Socialclass ) / 9)
+            };
+
+            var pc = d3.parcoords()("#example-progressive")
+                .data(data)
+                .dimensions({
+                    "Wave": {
+                        orient: 'left',
+                        type: 'number',
+                    },
+
+                    "State of health": {
+                        orient: 'left',
+                        type: 'number',
+                    },
+                    "Satisfaction with life": {
+                        orient: 'left',
+                        type: 'number',
+                    },
+
+                    "Democracy": {
+                        orient: 'left',
+                        type: 'number',
+                    },
+
+                    "Scale of income": {
+                        orient: 'left',
+                        type: 'number',
+                    },
+                    "Social class": {
+                        orient: 'left',
+                        type: 'number',
+                    },
+
+                    "Country": {
+                        orient: 'right',
+                        type: 'string',
+                    },
+                })
+                .hideAxis(["Number", "User", "Alias"])
+                .bundlingStrength(0.9)
+                .smoothness(0.08)
+                .color(color)
+                .render()
+                .createAxes()
+                .composite("darken")
+                .alpha(1)
+                .alphaOnBrushed(0.2)
+                .brushedColor(color_brushed);
+               pc.brushMode("1D-axes-multi");
+        });
+
+
+    </script>
+</div>
+</body>
+</html>
+
+
